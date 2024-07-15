@@ -7,16 +7,16 @@ from flask_restx import Api
 # Initialize Flask app
 app = Flask(__name__)
 app.config.from_object(Config)
-api = Api(app, version="1.0", title="Notes API", description="A simple Notes API")
-# Initialize database
+
+# Initialize Flask-RESTX API
+api = Api(app, version="1.0", title="API", description="Simple API")
+
+# Initialize SQLAlchemy database
 db = SQLAlchemy(app)
+
+# Initialize Flask-Migrate
 migrate = Migrate(app, db)
 
-
-# Register blueprint
-from .routes import note_bp
-
-
-app.register_blueprint(note_bp)
-
-
+# Import models and routes
+from app.models import User
+from app.routes import API
